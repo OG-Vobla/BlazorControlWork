@@ -1,0 +1,24 @@
+﻿@page "/mainpage"
+<style>
+	.right {
+		text-align: right;
+	}
+</style>
+@using BlazorControlWork.Data
+@inject SingletonServise singleton
+@inject NavigationManager navManager
+<div class="right"><a href="@Navigate">@LName @FName</a></div>
+<h3>MainPage</h3>
+
+
+<h1>Hello</h1>
+@code {
+	string LName = SingletonServise.GetUser().LName;
+	string FName = SingletonServise.GetUser().FName;
+
+	
+	public void Navigate()
+	{
+		navManager.NavigateTo("user");
+	}
+}

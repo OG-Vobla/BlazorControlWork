@@ -1,0 +1,33 @@
+﻿@page "/user"
+<h3>UserrPage</h3>
+@inject NavigationManager navManager
+@using BlazorControlWork.Data
+@inject SingletonServise singleton
+
+<p>
+	@Login
+</p>
+
+<p>
+	@Email
+</p>
+<p>
+	@FName
+</p>
+<p>
+	@LName
+</p>
+<p>
+	<button onclick="@LogOut">LogOut</button>
+</p>
+@code {
+	public string Login = SingletonServise.GetUser().Login;
+	public string Email = SingletonServise.GetUser().Email;
+	public string FName = SingletonServise.GetUser().FName;
+	public string LName = SingletonServise.GetUser().LName;
+
+	public void LogOut()
+	{
+
+	}
+}

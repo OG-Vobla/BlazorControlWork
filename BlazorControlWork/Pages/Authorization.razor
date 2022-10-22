@@ -1,0 +1,52 @@
+﻿@page "/authorization"
+<PageTitle>User Authorization</PageTitle>
+@inject NavigationManager navManager
+@using BlazorControlWork.Data
+<style>
+	p.Message {
+		background: #D9FFAD;
+		color: green;
+		padding: 2px;
+	}
+</style>
+<h3>Authorization</h3>
+
+<p class="Message">@Message</p>
+<p>
+	Login
+	<input type="text" name="login" @bind-value="@Login" />
+</p>
+<p>
+	Password
+	<input type="text" @bind-value="@Password" />
+</p>
+<p>
+	<button onclick="@LogIn">Create</button>
+</p>
+@code {
+	public string Message = "";
+	public string Login = "";
+	public string Password;
+
+	public void LogIn()
+	{
+		if (Login != "")
+		{
+			User autoUser = MongoDb.Find(Login);
+			if (autoUser != null)
+			{
+				if (autoUser.Password == Password)
+				{
+					navManager.NavigateTo("mainpage");
+					SingletonServise.SetUser(autoUser);
+				}
+			}
+			else 
+			{
+				Message = "This User not found. Pls check login.";
+			}
+		}
+		
+		
+	}
+}

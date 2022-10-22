@@ -1,5 +1,75 @@
-﻿<h3>Registration</h3>
+﻿@page "/registration"
+<PageTitle>User Registration</PageTitle>
+@inject NavigationManager navManager
+@using BlazorControlWork.Data
+@inject SingletonServise singleton
+
+  <style>
+   p.Message {
+    background: #D9FFAD; 
+    color: green;
+    padding: 2px;
+   }
+  </style>
+
+<h3>Registration</h3>
+<div><p class="Message">@Message</p></div>
+<form action="">
+	<p>
+		Login
+		<input required type="text" name="login" @bind-value="@Login" />
+	</p>
+	<p>
+		Password
+		<input required type="password" @bind-value="@Password" />
+	</p>
+	<p>
+		Password confirmation
+		<input required type="password" @bind-value="@PasswordConfirmation" />
+	</p>
+	<p>
+		Email
+		<input required type="text" @bind-value="@Email" />
+	</p>
+	<p>
+		FName
+		<input required type="text" @bind-value="@FName" />
+	</p>
+	<p>
+		LName
+		<input required type="text" @bind-value="@LName" />
+	</p>
+	<p>
+		<button onclick="@CreateUser">Create</button>
+	</p>
+</form>
 
 @code {
+	public string Login = "";
+	public string Password = "";
+	public string PasswordConfirmation = "";
+	public string Email = "";
+	public string FName = "";
+	public string LName = "";
+	public string Message = "";
 
+	public void CreateUser()
+	{
+		if ( Login != "" && Password != "" && PasswordConfirmation != "" && Email != "" && FName != "" && LName != "")
+		{
+			if (Password == PasswordConfirmation)
+			{
+				
+				User user = new User(LName, FName, Login, Password, Email);
+				MongoDb.AddToDB(user);
+				SingletonServise.SetUser(user);
+				navManager.NavigateTo("mainpage");
+			}
+			else
+			{
+				Message = "Passwords do not match";
+			}
+		}
+
+	}
 }
