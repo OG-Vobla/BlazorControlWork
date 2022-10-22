@@ -5,13 +5,14 @@ namespace BlazorControlWork.Data
 {
     public class SingletonServise
     {
-        public static User user;
+        User user;
 
-        public static User GetUser()
+        public User GetUser()
         {
+
             return user;
         }
-        public static void SetUser(User newUser)
+        public void SetUser(User newUser)
         {
             user = newUser;
         }

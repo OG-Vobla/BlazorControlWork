@@ -1,4 +1,5 @@
-﻿@page "/mainpage"
+﻿@layout Layout
+@page "/mainpage"
 <style>
 	.right {
 		text-align: right;
@@ -7,15 +8,9 @@
 @using BlazorControlWork.Data
 @inject SingletonServise singleton
 @inject NavigationManager navManager
-<div class="right"><a href="@Navigate">@LName @FName</a></div>
-<h3>MainPage</h3>
 
-
-<h1>Hello</h1>
+<h1>Hello @singleton.GetUser().LName @singleton.GetUser().FName</h1>
 @code {
-	string LName = SingletonServise.GetUser().LName;
-	string FName = SingletonServise.GetUser().FName;
-
 	
 	public void Navigate()
 	{

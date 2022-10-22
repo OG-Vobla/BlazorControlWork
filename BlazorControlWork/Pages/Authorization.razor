@@ -1,6 +1,7 @@
 ﻿@page "/authorization"
 <PageTitle>User Authorization</PageTitle>
 @inject NavigationManager navManager
+@inject SingletonServise singleton
 @using BlazorControlWork.Data
 <style>
 	p.Message {
@@ -21,12 +22,20 @@
 	<input type="text" @bind-value="@Password" />
 </p>
 <p>
-	<button onclick="@LogIn">Create</button>
+	<button type="button" onclick="@LogIn">LogIn</button>
+</p>
+<p>
+	<button onclick="@registration">Registration</button>
 </p>
 @code {
 	public string Message = "";
 	public string Login = "";
 	public string Password;
+
+	public void registration ()
+	{
+		navManager.NavigateTo("registration");
+	}
 
 	public void LogIn()
 	{
@@ -38,7 +47,7 @@
 				if (autoUser.Password == Password)
 				{
 					navManager.NavigateTo("mainpage");
-					SingletonServise.SetUser(autoUser);
+					singleton.SetUser(autoUser);
 				}
 			}
 			else 

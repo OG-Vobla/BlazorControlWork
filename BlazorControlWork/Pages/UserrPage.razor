@@ -1,33 +1,33 @@
 ﻿@page "/user"
-<h3>UserrPage</h3>
 @inject NavigationManager navManager
 @using BlazorControlWork.Data
 @inject SingletonServise singleton
 
-<p>
-	@Login
-</p>
-
-<p>
-	@Email
-</p>
-<p>
-	@FName
-</p>
-<p>
-	@LName
-</p>
+<h3>UserrPage</h3>
+<label>Login</label>
+<br />
+<input type="text" readonly value="@singleton.GetUser().Login">
+<br>
+<label>Email</label>
+<br />
+<input type="text" readonly value="@singleton.GetUser().Email">
+<br>
+<label>Name</label>
+<br>
+<input type="text" readonly value="@singleton.GetUser().FName">
+<br>
+<label>Surname</label>
+<br>
+<input type="text" readonly value="@singleton.GetUser().LName">
+<br>
 <p>
 	<button onclick="@LogOut">LogOut</button>
 </p>
 @code {
-	public string Login = SingletonServise.GetUser().Login;
-	public string Email = SingletonServise.GetUser().Email;
-	public string FName = SingletonServise.GetUser().FName;
-	public string LName = SingletonServise.GetUser().LName;
 
 	public void LogOut()
 	{
-
+		singleton.SetUser(new User("Guest", "", "", "", ""));
+		navManager.NavigateTo("authorization");
 	}
 }

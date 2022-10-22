@@ -1,0 +1,14 @@
+﻿@inherits LayoutComponentBase
+@using BlazorControlWork.Data
+@inject SingletonServise singleton
+
+<div class="page">
+    <main>
+        <div class="top-row px-4">
+            <a href="user" target="_blank">@singleton.GetUser().FName @singleton.GetUser().LName </a>
+        </div>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

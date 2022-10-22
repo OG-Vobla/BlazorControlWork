@@ -45,25 +45,24 @@
 </form>
 
 @code {
-	public string Login = "";
-	public string Password = "";
-	public string PasswordConfirmation = "";
-	public string Email = "";
-	public string FName = "";
-	public string LName = "";
-	public string Message = "";
+	public string Login ;
+	public string Password ;
+	public string PasswordConfirmation ;
+	public string Email ;
+	public string FName ;
+	public string LName ;
+	public string Message ;
 
 	public void CreateUser()
 	{
-		if ( Login != "" && Password != "" && PasswordConfirmation != "" && Email != "" && FName != "" && LName != "")
+		if (Login != null && Password != null && PasswordConfirmation != null && Email != null && FName != null && LName != null)
 		{
 			if (Password == PasswordConfirmation)
 			{
 				
 				User user = new User(LName, FName, Login, Password, Email);
 				MongoDb.AddToDB(user);
-				SingletonServise.SetUser(user);
-				navManager.NavigateTo("mainpage");
+				navManager.NavigateTo("authorization");
 			}
 			else
 			{
