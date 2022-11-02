@@ -14,7 +14,6 @@
 
 <h3>Registration</h3>
 <div><p class="Message">@Message</p></div>
-<form action="">
 	<p>
 		Login
 		<input  type="text" name="login" @bind-value="@Login" />
@@ -39,12 +38,13 @@
 		LName
 		<input  type="text" @bind-value="@LName" />
 	</p>
+
 	<p>
 		<button class="btn btn-primary" onclick="@CreateUser">Create</button>
 	</p>
 
 	<button class="btn btn-primary" @onclick="Authorization">Sign in</button>
-</form>
+
 
 @code {
 	private string Login = "";
@@ -60,7 +60,7 @@
 
 		if (Login != "" && Email != "" && FName != "" && LName != "" && Password != "" && PasswordConfirmation != "")
 		{
-			if (MongoDb.Find(Login) != null)
+			if (MongoDb.Find(Login) == null)
 			{
 				if (Password == PasswordConfirmation)
 				{
@@ -78,6 +78,10 @@
 			{
 				Message = "Login already";
 			}
+		}
+		else
+		{
+			Message = "Not all fields are filled.";
 		}
 
 	}

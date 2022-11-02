@@ -2,6 +2,7 @@
 @inject NavigationManager navManager
 @using BlazorControlWork.Data
 @inject SingletonServise singleton
+@inject FileSystemService fileSystem
 
 <h3>UserrPage</h3>
 <label>Login</label>
@@ -20,14 +21,15 @@
 <br>
 <input type="text" readonly value="@singleton.GetUser().LName">
 <br>
+
 <p>
 	<button class="btn btn-primary" onclick="@LogOut">LogOut</button>
 </p>
 @code {
-
 	public void LogOut()
 	{
 		singleton.SetUser(new User("Guest", "", "", "", ""));
 		navManager.NavigateTo("authorization");
 	}
+
 }
